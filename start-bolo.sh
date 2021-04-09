@@ -331,15 +331,25 @@ Start_bolo_use_docker_compose() {
 	cd ${BOLO_INSTALL_DIR} && docker-compose pull
 	cd ${BOLO_INSTALL_DIR} && docker-compose down && docker-compose up -d
 }
-# # Deploy Bolo
-# Deply_bolo(){
-# 	echo "-------------------------------------------------------------------"
-# 	Get_bolo_docker_compose_repo
-# 	Set_important_config
-# 	Print_important_config
-# 	Write_config_to_file
-# 	Start_bolo_use_docker_compose
-# }
+# 重启博客
+Restart_Bolo_blog(){
+	echo "-------------------------------------------------------------------"
+	cd ${BOLO_INSTALL_DIR} && docker-compose restart
+}
+# Deploy Bolo
+Deply_bolo(){
+	echo "-------------------------------------------------------------------"
+	Check_install_dir
+	Set_important_config
+	Print_important_config
+	Get_bolo_docker_compose_repo
+	Write_config_to_file
+	Start_bolo_use_docker_compose
+	echo "等待数据库初次初始化完成........."
+	sleep 6s
+	echo "正在重启博客......"
+	Restart_Bolo_blog
+}
 # 博客备份
 Backup_blog() {
 	echo "-------------------------------------------------------------------"
@@ -416,12 +426,7 @@ menu_server() {
 		Restart_Docker
 		;;
 	7)
-		Check_install_dir
-		Set_important_config
-		Print_important_config
-		Get_bolo_docker_compose_repo
-		Write_config_to_file
-		Start_bolo_use_docker_compose
+		Deply_bolo
 		;;
 	8)
 		Start_bolo_use_docker_compose
