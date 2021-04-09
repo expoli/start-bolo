@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
@@ -47,7 +47,7 @@ check_sys(){
 }
 # 安装依赖
 Installation_dependency(){
-    if [[ ${release}=="centos" ]]; then
+    if [[ ${release} == "centos" ]]; then
         sudo yum -y update 
 		sudo yum remove -y docker \
 				docker-client \
@@ -64,7 +64,7 @@ Installation_dependency(){
         sudo yum install -y docker-ce \
 				docker-ce-cli \
 				containerd.io
-    elif [[ ${release}=="debian" ]]; then
+    elif [ ${release} == "debian" ]; then
     # Uninstall old versions
         sudo apt-get update -y
         sudo apt-get remove -y docker \
@@ -92,7 +92,7 @@ Installation_dependency(){
             docker-ce \
             docker-ce-cli \
             containerd.io
-    elif [[ ${release}=="ubuntu" ]]; then
+    elif [ ${release} == "ubuntu" ]; then
         sudo apt-get update -y
         sudo apt-get remove -y docker \
 				docker-engine \
@@ -115,7 +115,7 @@ Installation_dependency(){
             docker-ce-cli \
             containerd.io
 
-    elif [[${release}=="arch"]]; then
+    elif [ ${release} == "arch" ]; then
         sudo pacman -Syu --noconfirm
         sudo pacman -S docker --noconfirm
     fi
@@ -132,9 +132,9 @@ Install_Docker(){
 	echo -e "${Info} 开始安装/配置 依赖..."
 	Installation_dependency
 	echo -e "${Info} 所有步骤 安装完毕."
-    docker info
+    # docker info
 	echo -e "${Info} 开启守护进程,设置为开机启动并开始启动..."
-	Start_Docker
+	# Start_Docker
 }
 # 启动 Docker
 Start_Docker(){
@@ -153,7 +153,7 @@ Restart_Docker(){
 }
 # 卸载Docker
 Uninstall_Docker(){
-    if [[ ${release}=="centos" ]]; then
+    if [[ ${release} == "centos" ]]; then
         sudo yum remove -y docker \
 				docker-client \
 				docker-client-latest \
@@ -162,44 +162,44 @@ Uninstall_Docker(){
 				docker-latest-logrotate \
 				docker-logrotate \
 				docker-engine
-    elif [[ ${release}=="debian" ]]; then
+    elif [[ ${release} == "debian" ]]; then
         sudo apt-get remove -y docker-ce \
 				docker-ce-cli \
 				containerd.io
-	elif [[ ${release}=="ubuntu" ]]; then
+	elif [[ ${release} == "ubuntu" ]]; then
 		sudo apt-get remove -y docker-ce \
 			docker-ce-cli \
 			containerd.io
-	elif [[${release}=="arch" ]]; then
+	elif [[${release} == "arch" ]]; then
 		sudo pacman -Rs docker docker-compose --noconfirm
     fi
 }
 # 更新Docker
 Update_Docker(){
-    if [[ ${release}=="centos" ]]; then
+    if [[ ${release} == "centos" ]]; then
         sudo yum update -y docker*
 		sudo yum info docker* 
-    elif [[ ${release}=="debian" ]]; then
+    elif [[ ${release} == "debian" ]]; then
         sudo apt-get update
 		sudo apt-get upgrade -y docker
 		sudo apt show docker
-	elif [[ ${release}=="ubuntu" ]]; then
+	elif [[ ${release} == "ubuntu" ]]; then
 		sudo apt-get update
 		sudo apt-get upgrade -y docker
 		sudo apt show docker
-	elif [[ ${release}=="arch" ]]; then
+	elif [[ ${release} == "arch" ]]; then
 		sudo pacman -Syu --noconfirm
     fi
 }
 # 安装docker-compose
 Install_Docker_compose(){
-	if [[ ${release}=="centos" ]]; then
+	if [[ ${release} == "centos" ]]; then
         sudo yum install -y docker-compose
-    elif [[ ${release}=="debian" ]]; then
+    elif [[ ${release} == "debian" ]]; then
         sudo apt-get install -y docker-compose
-	elif [[ ${release}=="ubuntu" ]]; then
+	elif [[ ${release} == "ubuntu" ]]; then
         sudo apt-get install -y docker-compose
-	elif [[ ${release}=="arch" ]]; then
+	elif [[ ${release} == "arch" ]]; then
 		sudo pacman -S docker-compose --noconfirm
     else 
 		sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -289,4 +289,5 @@ menu_server(){
 		;;
 	esac
 }
+check_sys
 menu_server
