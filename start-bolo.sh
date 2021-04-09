@@ -47,7 +47,7 @@ check_sys(){
 }
 # 安装依赖
 Installation_dependency(){
-    if [[ ${release} == "centos" ]]; then
+    if [[ ${release}=="centos" ]]; then
         sudo yum -y update 
 		sudo yum remove -y docker \
 				docker-client \
@@ -64,7 +64,7 @@ Installation_dependency(){
         sudo yum install -y docker-ce \
 				docker-ce-cli \
 				containerd.io
-    elif [[ ${release} == "debian" ]]; then
+    elif [[ ${release}=="debian" ]]; then
     # Uninstall old versions
         sudo apt-get update -y
         sudo apt-get remove -y docker \
@@ -92,7 +92,7 @@ Installation_dependency(){
             docker-ce \
             docker-ce-cli \
             containerd.io
-    elif [[ ${release} == "ubuntu" ]]; then
+    elif [[ ${release}=="ubuntu" ]]; then
         sudo apt-get update -y
         sudo apt-get remove -y docker \
 				docker-engine \
@@ -153,7 +153,7 @@ Restart_Docker(){
 }
 # 卸载Docker
 Uninstall_Docker(){
-    if [[ ${release} == "centos" ]]; then
+    if [[ ${release}=="centos" ]]; then
         sudo yum remove -y docker \
 				docker-client \
 				docker-client-latest \
@@ -162,44 +162,44 @@ Uninstall_Docker(){
 				docker-latest-logrotate \
 				docker-logrotate \
 				docker-engine
-    elif [[ ${release} == "debian"]]; then
+    elif [[ ${release}=="debian" ]]; then
         sudo apt-get remove -y docker-ce \
 				docker-ce-cli \
 				containerd.io
-	elif [[ ${release} == "ubuntu"]]; then
+	elif [[ ${release}=="ubuntu" ]]; then
 		sudo apt-get remove -y docker-ce \
 			docker-ce-cli \
 			containerd.io
-	elif [[${release}=="arch"]]; then
+	elif [[${release}=="arch" ]]; then
 		sudo pacman -Rs docker docker-compose --noconfirm
     fi
 }
 # 更新Docker
 Update_Docker(){
-    if [[ ${release} == "centos" ]]; then
+    if [[ ${release}=="centos" ]]; then
         sudo yum update -y docker*
 		sudo yum info docker* 
-    elif [[ ${release} == "debian"]]; then
+    elif [[ ${release}=="debian" ]]; then
         sudo apt-get update
 		sudo apt-get upgrade -y docker
 		sudo apt show docker
-	elif [[ ${release} == "ubuntu"]]; then
+	elif [[ ${release}=="ubuntu" ]]; then
 		sudo apt-get update
 		sudo apt-get upgrade -y docker
 		sudo apt show docker
-	elif [[ ${release} =="arch"]]; then
+	elif [[ ${release}=="arch" ]]; then
 		sudo pacman -Syu --noconfirm
     fi
 }
 # 安装docker-compose
 Install_Docker_compose(){
-	if [[ ${release} == "centos" ]]; then
+	if [[ ${release}=="centos" ]]; then
         sudo yum install -y docker-compose
-    elif [[ ${release} == "debian"]]; then
+    elif [[ ${release}=="debian" ]]; then
         sudo apt-get install -y docker-compose
-	elif [[ ${release} == "ubuntu"]]; then
+	elif [[ ${release}=="ubuntu" ]]; then
         sudo apt-get install -y docker-compose
-	elif [[ ${release} =="arch"]]; then
+	elif [[ ${release}=="arch" ]]; then
 		sudo pacman -S docker-compose --noconfirm
     else 
 		sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -220,13 +220,13 @@ check_pid_server(){
 Update_Shell(){
 	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/expoli/Docker-install-menu-bash/master/install_docker.sh"|grep 'SH_VERSION="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 无法链接到 Github !" && exit 0
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/expoli/Docker-install-menu-bash/master/install_docker.sh" && chmod +x install_docker.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/zzutcy/Docker-install-menu-bash/master/install_docker.sh" && chmod +x install_docker.sh
 	echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !(注意：因为更新方式为直接覆盖当前运行的脚本，所以可能下面会提示一些报错，无视即可)" && exit 0
 }
 # 主菜单
 menu_server(){
-	echo && echo -e "  Docker 一键安装管理脚本 ${Red_font_prefix}[v${SH_VERSION}]${Font_color_suffix}
-	-- expoli | expoli/shell --
+	echo && echo -e "  Bolo-blog 一键安装管理脚本 ${Red_font_prefix}[v${SH_VERSION}]${Font_color_suffix}
+	-- expoli | Bolo-blog/shell --
 	
 	${Green_font_prefix} 0.${Font_color_suffix} 升级脚本
 	————————————
