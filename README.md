@@ -11,6 +11,14 @@
 
 /opt/bolo-blog
 
+## 使用方法
+
+```
+git clone https://github.com/expoli/start-bolo.git
+cd start-bolo && chmod +x ./start-bolo.sh
+./start-bolo.sh
+```
+
 ```
 
   Bolo-blog 一键安装管理脚本 [v1.0.0]
