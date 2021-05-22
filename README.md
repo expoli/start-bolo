@@ -13,6 +13,8 @@
 
 ## 使用方法
 
+**注意！因为默认容器会尝试创建数据库用户，所以输入用户名的时候避免输入`root` 否则会导致部署失败！！**
+
 ```
 git clone https://github.com/expoli/start-bolo.git
 cd start-bolo && chmod +x ./start-bolo.sh
@@ -46,4 +48,4 @@ cd start-bolo && chmod +x ./start-bolo.sh
 
  请输入数字 [0-10]:
 
-``
+```
