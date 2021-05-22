@@ -5,7 +5,7 @@ export PATH
 #=================================================
 #	System Required: CentOS/Debian/Ubuntu/Arch
 #	Description: bolo blog start
-#	Version: 1.0.0
+#	Version: 1.0.1
 #	Author: expoli
 #	Blog: http://expoli.tech
 #   created 2021.04.09
@@ -320,6 +320,7 @@ Write_config_to_file() {
 
 	sed -i "s/JDBC_USERNAME=bolo/JDBC_USERNAME=${bolo_blog_db_user}/g" "${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}"
 	sed -i "s/JDBC_PASSWORD=bolo123456/JDBC_PASSWORD=${bolo_blog_db_passwd}/g" "${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}"
+	sed -i "s/JDBC_URL=jdbc:mysql:\/\/db:3306\/bolo/JDBC_URL=jdbc:mysql:\/\/db:3306\/${bolo_blog_db}/g" "${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}"
 
 	sed -i "s/me@example.org/${user_email}/g" "${BOLO_INSTALL_DIR}/${BOLO_DOCKER_COMPOSE_CONFIG_FILE}"
 	sed -i "s/blog.example.org/${bolo_blog_domain}/g" "${BOLO_INSTALL_DIR}/${BOLO_DOCKER_COMPOSE_CONFIG_FILE}"
