@@ -347,8 +347,9 @@ Deply_bolo(){
 	Write_config_to_file
 	Start_bolo_use_docker_compose
 	echo "等待数据库初次初始化完成........."
-	sleep 6s
+	sleep 16s
 	echo "正在重启博客......"
+	sleep 10s
 	Restart_Bolo_blog
 }
 # 博客备份
@@ -388,6 +389,7 @@ menu_server() {
 	${Green_font_prefix} 8.${Font_color_suffix} 更新 Bolo-blog
 	${Green_font_prefix} 9.${Font_color_suffix} 备份 Bolo-blog
 	${Green_font_prefix} 10.${Font_color_suffix} 恢复 Bolo-blog
+	${Green_font_prefix} 11.${Font_color_suffix} 重启 Bolo-blog
 	————————————
 	${Green_font_prefix} q.${Font_color_suffix} 退出脚本
 			" && echo
@@ -437,6 +439,9 @@ menu_server() {
 		;;
 	10)
 		Restore_blog
+		;;
+	11)
+		Restart_Bolo_blog
 		;;
 	q)
 		exit 0
