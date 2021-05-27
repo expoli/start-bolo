@@ -5,14 +5,14 @@ export PATH
 #=================================================
 #	System Required: CentOS/Debian/Ubuntu/Arch
 #	Description: bolo blog start
-#	Version: 1.0.1
+#	Version: 1.0.2
 #	Author: expoli
 #	Blog: http://expoli.tech
 #   created 2021.04.09
 #   email me@expoli.tech
 #=================================================
 
-SH_VERSION="1.0.0"
+SH_VERSION="1.0.2"
 BINARY_FILES_PLACE="/usr/bin"
 DOCKER_DAEMON_JSON="/etc/docker/daemon.json"
 BOLO_INSTALL_DIR="/opt/bolo-blog"
