@@ -12,7 +12,7 @@ export PATH
 #   email me@expoli.tech
 #=================================================
 
-SH_VERSION="1.0.2"
+SH_VERSION="1.0.4"
 BINARY_FILES_PLACE="/usr/bin"
 # DOCKER_DAEMON_JSON="/etc/docker/daemon.json"
 BOLO_INSTALL_DIR="/opt/bolo-blog"
