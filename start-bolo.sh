@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 #=================================================
 #	System Required: CentOS/Debian/Ubuntu/Arch
 #	Description: bolo blog start
-#	Version: 1.0.3
+#	Version: 1.0.4
 #	Author: expoli
 #	Blog: http://expoli.tech
 #   created 2021.04.09
@@ -14,7 +14,7 @@ export PATH
 
 SH_VERSION="1.0.2"
 BINARY_FILES_PLACE="/usr/bin"
-DOCKER_DAEMON_JSON="/etc/docker/daemon.json"
+# DOCKER_DAEMON_JSON="/etc/docker/daemon.json"
 BOLO_INSTALL_DIR="/opt/bolo-blog"
 BOLO_ENV_CONFIG_FILE="bolo-env.env"
 BOLO_DOCKER_COMPOSE_CONFIG_FILE="docker-compose.yaml"
@@ -189,7 +189,7 @@ Uninstall_Docker() {
 		sudo apt-get remove -y docker-ce \
 			docker-ce-cli \
 			containerd.io
-	elif [[${release} == "arch" ]]; then
+	elif [[ ${release} == "arch" ]]; then
 		sudo pacman -Rs docker docker-compose --noconfirm
 	fi
 }
@@ -237,9 +237,9 @@ Check_pid_server() {
 }
 # 脚本升级
 Update_Shell() {
-	# sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/expoli/Docker-install-menu-bash/master/install_docker.sh"|grep 'SH_VERSION="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/expoli/start-bolo/master/start-bolo.sh"|grep 'SH_VERSION="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 无法链接到 Github !" && exit 0
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/expoli/Docker-install-menu-bash/master/install_docker.sh" && chmod +x install_docker.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/expoli/start-bolo/master/start-bolo.sh" && chmod +x install_docker.sh
 	echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !(注意：因为更新方式为直接覆盖当前运行的脚本，所以可能下面会提示一些报错，无视即可)" && exit 0
 }
 # 检测部署目录
@@ -309,7 +309,7 @@ Write_config_to_file() {
 	echo "-------------------------------------------------------------------"
 	if [[ -f ${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}} ]]; then
 		echo -e "${Tip} 正在备份原始配置文件..."
-		cp "${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE} ${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}_back"
+		cp "${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}" "${BOLO_INSTALL_DIR}/${BOLO_ENV_CONFIG_FILE}_back"
 		echo -e "${Tip} 原始配置文件已备份完成..."
 	fi
 
@@ -350,7 +350,8 @@ Deply_bolo(){
 	sleep 16s
 	echo "正在重启博客......"
 	sleep 10s
-	Restart_Bolo_blog
+	docker restart bolo
+	docker restart traefik
 }
 # 博客备份
 Backup_blog() {
@@ -447,7 +448,7 @@ menu_server() {
 		exit 0
 		;;
 	*)
-		echo "请输入正确数字 [0-10]"
+		echo "请输入正确数字 [0-11]"
 		;;
 	esac
 }
