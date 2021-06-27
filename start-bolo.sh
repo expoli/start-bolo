@@ -5,7 +5,7 @@ export PATH
 #=================================================
 #	System Required: CentOS/Debian/Ubuntu/Arch
 #	Description: bolo blog start
-#	Version: 1.0.2
+#	Version: 1.0.3
 #	Author: expoli
 #	Blog: http://expoli.tech
 #   created 2021.04.09
@@ -159,7 +159,7 @@ Install_Docker() {
 Start_Docker() {
 	sudo systemctl enable docker
 	sudo systemctl start docker
-	sudo systemctl status docker
+# 	sudo systemctl status docker
 }
 # 停止
 Stop_Docker() {
