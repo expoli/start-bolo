@@ -1,5 +1,7 @@
 # Bolo 博客一键部署脚本
 
+## 注意：本配置方式不支持宝塔用户、BT用户请自行尝试裸启动 [tangcuyu/bolo-solo](https://hub.docker.com/repository/docker/tangcuyu/traefik/general) 镜像、BT用户不在解答范围。
+
  此项目是对 [start-bolo-with-docker-compose](https://github.com/expoli/start-bolo-with-docker-compose) 的封装，支持交互式部署，一键式的傻瓜脚本。
 
 
